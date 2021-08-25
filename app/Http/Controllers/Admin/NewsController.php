@@ -8,22 +8,8 @@ use Illuminate\Http\Request;
 class NewsController extends Controller
 {
     public function add()
-{
-    return view('admin.profile.create');
+  {
+      return view('admin.news.create');
+  }
 }
 
-public function create()
-{
-    return redirect('admin/profile/create');
-}
-
-public function edit()
-{
-    return view('admin.profile.edit');
-}
-
-public function update()
-{
-    return redirect('admin/profile/edit');
-}
-}

@@ -23,5 +23,5 @@ Route::group(['prefix' => 'admin'], function() {
    Route::get('admin/profile/edit', 'Admin\ProfileConroller@edit');
 
 //課題3用
-Route::get('XXX', 'Admin\AAAController@bbb');
+Route::get('XXX', 'xxx\AAAController@bbb');
 });

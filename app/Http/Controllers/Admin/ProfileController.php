@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Profile;
+use App\profileHistory;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -43,19 +45,20 @@ class ProfileController extends Controller
 
   public function update(Request $request)
   {
-      // Validationをかける
-      $this->validate($request, profile::$rules);
-      // News Modelからデータを取得する
-      $profile = profile::find($request->id);
-      // 送信されてきたフォームデータを格納する
-      $profile_form = $request->all();
-      unset($profile_form['_token']);
+    $this->validate($request, Profile::$rules);
+        // Profile Modelからデータを取得する
+        $profile = Profile::find($request->id);
+        // 送信されてきたフォームデータを格納する
+        $profile_form = $request->all();
+        unset($profile_form['_token']);
+        $profile->fill($profile_form)->save();
 
-      // 該当するデータを上書きして保存する
-      $profile->fill($profile_form)->save();
+        $history = new ProfileHistory;
+        $history->profile_id = $profile->id;
+        $history->edited_at = Carbon::now();
+        $history->save();
 
-      return redirect('admin/profile');
-  }
+        return redirect('admin/profile');
 }
 
 

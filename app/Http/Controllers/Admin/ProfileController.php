@@ -39,7 +39,7 @@ class ProfileController extends Controller
       if (empty($profile)) {
         abort(404);    
       }
-      return view('admin.profile.edit', ['news_form' => $profile]);
+      return view('admin.profile.edit', ['profile_form' => $profile]);
   }
 
 
@@ -59,6 +59,7 @@ class ProfileController extends Controller
         $history->save();
 
         return redirect('admin/profile');
+ }
 }
 
 
